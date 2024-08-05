@@ -247,6 +247,16 @@ void main() {
       expect(node.isObject, isTrue);
       expect(node.path!.key, 'world');
     });
+
+    group('JsonNode.position', () {
+      test('should return start positions of object, arrays and scalars', () {
+        var v = '{"hello": [1, 2, true], "world": {"!": "!!!"}}';
+        var nodes = parse(v);
+
+        var positions = [0, 9, 11, 13, 16, 32, 38];
+        expect(nodes.map((v) => v.position), positions);
+      });
+    });
   });
 }
 
