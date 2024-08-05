@@ -20,6 +20,7 @@ extension ReadAsJsonFileExtension on File {
 }
 
 abstract class JsonFileConsumer<T> {
+  const JsonFileConsumer();
   T consume(RandomAccessJsonFile file);
 }
 

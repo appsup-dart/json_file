@@ -2,6 +2,8 @@ import '../json_file.dart';
 
 /// Assembles a JSON file into a Dart object.
 class JsonAssembler extends JsonFileConsumer<dynamic> {
+  const JsonAssembler();
+
   @override
   dynamic consume(RandomAccessJsonFile file) {
     var node = file.readSync();
