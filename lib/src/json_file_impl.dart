@@ -11,7 +11,7 @@ class JsonFileImpl implements RandomAccessJsonFile {
 
   final JsonParser parser = JsonParser(_chunkSize);
 
-  JsonNode? _current;
+  JsonNodeImpl? _current;
 
   int _startPosition = 0;
 
@@ -42,7 +42,7 @@ class JsonFileImpl implements RandomAccessJsonFile {
   }
 
   @override
-  JsonNode? peekSync() {
+  JsonNodeImpl? peekSync() {
     if (_current != null) {
       return _current;
     }
@@ -71,10 +71,10 @@ class JsonFileImpl implements RandomAccessJsonFile {
 
   @override
   void setPositionSync(int position) {
+    // TODO: optimize when position in range of current chunk
     parser.reset();
     _current = null;
     _startPosition = position;
-    file.setPositionSync(position);
     file.setPositionSync(position);
   }
 
@@ -89,5 +89,23 @@ class JsonFileImpl implements RandomAccessJsonFile {
         return;
       }
     }
+  }
+
+  final List<MapEntry<int, JsonNodeImpl?>> _states = [];
+
+  @override
+  void restoreStateSync() {
+    var state = _states.removeLast();
+
+    var node = state.value;
+    setPositionSync(state.key + (node?.position ?? 0));
+    _startPosition = state.key;
+    parser.setState(node?.path, node?.position);
+  }
+
+  @override
+  void saveStateSync() {
+    var node = peekSync();
+    _states.add(MapEntry(_startPosition, node));
   }
 }

@@ -67,7 +67,7 @@ class JsonParser {
 
   bool _isDone = false;
 
-  JsonNode? next() {
+  JsonNodeImpl? next() {
     while (true) {
       if (_isDone || _index >= _tokens.length) {
         return null;
@@ -161,6 +161,15 @@ class JsonParser {
           SubList(bytes, _tokens.last.position + 1, bytes.length);
     }
   }
+
+  void setState(JsonPathImpl? path, int? processed) {
+    _path = path;
+    if (processed != null) {
+      _processed = processed;
+    } else {
+      _isDone = true;
+    }
+  }
 }
 
 class JsonPathNodeKey extends JsonPathNode<String> {
@@ -188,7 +197,7 @@ class JsonPathNodeIndex extends JsonPathNode<int> {
 
 class JsonNodeImpl implements JsonNode {
   @override
-  final JsonPath? path;
+  final JsonPathImpl? path;
 
   @override
   final int position;

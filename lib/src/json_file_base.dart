@@ -82,6 +82,10 @@ abstract class RandomAccessJsonFile {
   /// ```
   ///
   void skipSync();
+
+  void saveStateSync();
+
+  void restoreStateSync();
 }
 
 /// A node in a JSON file.
