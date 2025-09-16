@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   lints: ^6.0.0
   test: ^1.21.0
-  file: ^6.0.0
+  file: ^7.0.0
 
 executables:
   djq: djq
