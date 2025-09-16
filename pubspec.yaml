@@ -2,6 +2,7 @@ name: json_file
 description: Fast and memory friendly access to large JSON files
 version: 0.1.0
 homepage: https://github.com/appsup-dart/json_file
+repository: https://github.com/appsup-dart/json_file
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -15,6 +16,21 @@ dev_dependencies:
   lints: ^6.0.0
   test: ^1.21.0
   file: ^7.0.0
+  melos: ^7.0.0
+
+melos:
+  useRootAsPackage: true
+
+  ide:
+    intellij: false
+
+  command:
+    version:
+      linkToCommits: true
+
+  scripts:
+    preversion: 
+      exec: dart test -j 1  
 
 executables:
   djq: djq
