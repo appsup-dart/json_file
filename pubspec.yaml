@@ -1,6 +1,6 @@
 name: json_file
 description: Fast and memory friendly access to large JSON files
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/appsup-dart/json_file
 repository: https://github.com/appsup-dart/json_file
 
